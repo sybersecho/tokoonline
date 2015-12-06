@@ -15,26 +15,21 @@ public class WebAppInitalizer implements WebApplicationInitializer {
 			.getLogger(WebAppInitalizer.class);
 
 	public WebAppInitalizer() {
-		logger.info("Web App Init created...");
+		logger.info("Web App created...");
 	}
 
 	@Override
 	public void onStartup(ServletContext container) throws ServletException {
-		logger.info("web init running");
+		logger.info("web app on startup call..");
 		// root context
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 		rootContext.register(MvcConfig.class);
 		rootContext.setServletContext(container);
 
-		// AnnotationConfigWebApplicationContext dispatcherServlet = new
-		// AnnotationConfigWebApplicationContext();
-		// dispatcherServlet.register(MvcConfig.class);
-
 		ServletRegistration.Dynamic servlet = container.addServlet("dispather",
 				new DispatcherServlet(rootContext));
 		servlet.setLoadOnStartup(1);
 		servlet.addMapping("/");
-		// container
 
 	}
 
